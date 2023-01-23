@@ -3,15 +3,13 @@ import { Link, Navigate } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
-function Resultado () {
+function Resultado (prop) {
 
     const token = sessionStorage.getItem('token');
 
     let query = new URLSearchParams(window.location.search);
 
     let keyword = query.get('nombrePelicula');
-
-    console.log(keyword);
     
     const [ peliculasBuscadas, setBuscador] = useState([]);
     
@@ -41,8 +39,11 @@ function Resultado () {
                             <div className="col-3 mt-2" key={key}>
                                 <div className="card">
                                     <img src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`} className="card-img-top" alt="..." />
+                                    <button className="fav-btn" onClick={ prop.addOrRemoveFavs } data-movieid={pelicula.id}> 🖤 
+                                    </button>
                                     <div className="card-body">
                                         <h5 className="card-title">{pelicula.title.substring(0, 80)}</h5>
+                                        <p className="card-text">{pelicula.overview.substring(0, 100)}...</p>
                                         <Link className="btn btn-dark" to={`/detalle?peliculaID=${ pelicula.id }`}>Ver Mas</Link>
                                     </div>
                                 </div>

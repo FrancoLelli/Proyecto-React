@@ -4,7 +4,7 @@ import { Link, Navigate  } from "react-router-dom";
 import swal from "sweetalert";
 
 
-function Listado (){
+function Listado ( prop ){
 
     const token = sessionStorage.getItem('token');
 
@@ -37,6 +37,7 @@ function Listado (){
                         <div className="col-3 mt-2" key={key}>
                             <div className="card">
                                 <img src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`} className="card-img-top" alt="..." />
+                                <button className="fav-btn" onClick={ prop.addOrRemoveFavs } data-movieid={pelicula.id}> 🖤 </button>
                                 <div className="card-body">
                                     <h5 className="card-title">{pelicula.title.substring(0, 80)}</h5>
                                     <p className="card-text">{pelicula.overview.substring(0, 100)}...</p>
